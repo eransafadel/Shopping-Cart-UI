@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Typewriter from "typewriter-effect";
+import { sliderItems } from ".././data";
 import {
   URL_HOMEPAGE_SHOPPING as SHOPPING_PHOTO,
   TEXT_DESCRIPTION as DESCRIPTION,
@@ -32,11 +33,13 @@ const Arrow = styled.div`
   margin: auto;
   cursor: pointer;
   opacity: 0.7;
+  z-index: 2;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -64,6 +67,7 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 70px;
+  color: #000066;
 `;
 
 const Desc = styled.p`
@@ -81,62 +85,52 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex((prev) => (prev === 0 ? sliderItems.length - 2 : prev - 1));
+    } else
+      setSlideIndex((prev) => (prev < sliderItems.length - 2 ? prev + 1 : 0));
+  };
+
   return (
     <Container>
-      <Arrow direction="left">
+      <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowBackIosNewIcon />
       </Arrow>
-      <Wrapper>
-        <Slide bg="FFF4D8">
-          <ImageContainer>
-            <Image src={SHOPPING_PHOTO} />
-          </ImageContainer>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImageContainer>
+              <Image src={item.img} />
+            </ImageContainer>
 
-          <InfoContainer>
-            <Title>
-              {" "}
-              <Typewriter
-                onInit={(typewriter) => {
+            <InfoContainer>
+              <Title>
+               
+                <Typewriter
+                  onInit={(typewriter) => {
                     typewriter
-                    .typeString("SUMMER SALE")
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString("20% OFF")
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString("SUMMER SALE")
-                    .start()
-                }}
-              />
-            </Title>
-            <Desc>{DESCRIPTION}</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="FFF4D8">
-          <ImageContainer>
-            <Image src={SHOPPING_PHOTO} />
-          </ImageContainer>
-
-          <InfoContainer>
-            <Title>POPULAR SALE</Title>
-            <Desc>{DESCRIPTION}</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="FFF4D8">
-          <ImageContainer>
-            <Image src={SHOPPING_PHOTO} />
-          </ImageContainer>
-
-          <InfoContainer>
-            <Title>WINTER SALE</Title>
-            <Desc>{DESCRIPTION}</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
+                      .typeString("SUMMER SALE")
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString("20% OFF")
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString("SUMMER SALE")
+                      .start();
+                  }}
+                />
+              </Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
+        ;
       </Wrapper>
-      <Arrow direction="right">
+      <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowForwardIosIcon />
       </Arrow>
     </Container>
