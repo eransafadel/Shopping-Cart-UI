@@ -58,12 +58,7 @@ const Button = styled.button`
   font-weight: 700;
   color: white;
   cursor: pointer;
-  &:hover {
-    background-color: #eaeaea;
-    
-    color: black;
-    font-weight: 800;
-  }
+ 
 `;
 
 const CategoryItem = ({ item }) => {
