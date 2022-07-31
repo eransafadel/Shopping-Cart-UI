@@ -1,7 +1,7 @@
 # FrontendEnd  - Shopping Website By Eran Safadel
 
 ## Home Page! 
-![Admin Panel Home](./images/HomePage.jpg)
+![Shopping Website Home](./images/HomePage.jpg)
 
 
 
