@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Button = styled.button`
   bottom: 0;
@@ -34,6 +35,7 @@ const Image = styled.img`
   object-fit: cover;
   border-style: solid;
   border-color: gray;
+  ${mobile({ height: "20vh" })}
   cursor: pointer;
   &:hover {
     opacity: 0.5;

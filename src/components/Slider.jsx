@@ -4,10 +4,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Typewriter from "typewriter-effect";
 import { sliderItems } from ".././data";
-import {
-  URL_HOMEPAGE_SHOPPING as SHOPPING_PHOTO,
-  TEXT_DESCRIPTION as DESCRIPTION,
-} from "./macros";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -15,6 +12,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  ${mobile({ display: "none" })}
 `;
 
 const Arrow = styled.div`
