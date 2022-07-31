@@ -1,12 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
+const Button = styled.button`
+  bottom: 0;
+  right: 0;
+  margin-right: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border: none;
+  padding: 10px;
+  width: 200px;
+  background-color: black;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+`;
+
 const Conatiner = styled.div`
   flex: 1;
   margin: 10px;
   height: 70vh;
   position: relative;
-  
+
 `;
 
 const Image = styled.img`
@@ -19,7 +37,6 @@ const Image = styled.img`
   cursor: pointer;
   &:hover {
     opacity: 0.5;
-    
   }
 `;
 
@@ -40,25 +57,6 @@ const Info = styled.div`
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
-`;
-
-const Button = styled.button`
-  bottom: 0;
-  right: 0;
-  margin-right:120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  border: none;
-  padding: 10px;
-  width: 200px;
-  background-color: black;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
- 
 `;
 
 const CategoryItem = ({ item }) => {

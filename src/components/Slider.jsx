@@ -39,7 +39,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transition:all 1.5s ease;
+  transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
@@ -101,34 +101,36 @@ const Slider = () => {
         <ArrowBackIosNewIcon />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
-            <ImageContainer>
-              <Image src={item.img} />
-            </ImageContainer>
+        {sliderItems.map((item) => {
+          const title = item.title;
+          return (
+            <Slide bg={item.bg} key={item.id}>
+              <ImageContainer>
+                <Image src={item.img} />
+              </ImageContainer>
 
-            <InfoContainer>
-              <Title>
-               
-                <Typewriter
-                  onInit={(typewriter) => {
-                    typewriter
-                      .typeString("SUMMER SALE")
-                      .pauseFor(2000)
-                      .deleteAll()
-                      .typeString("20% OFF")
-                      .pauseFor(2000)
-                      .deleteAll()
-                      .typeString("SUMMER SALE")
-                      .start();
-                  }}
-                />
-              </Title>
-              <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
-            </InfoContainer>
-          </Slide>
-        ))}
+              <InfoContainer>
+                <Title>
+                  <Typewriter
+                    onInit={(typewriter) => {
+                      typewriter
+                        .typeString("WINTER SALE")
+                        .pauseFor(2000)
+                        .deleteAll()
+                        .typeString("20% OFF")
+                        .pauseFor(2000)
+                        .deleteAll()
+                        .typeString("WINTER SALE")
+                        .start();
+                    }}
+                  />
+                </Title>
+                <Desc>{item.desc}</Desc>
+                <Button>SHOW NOW</Button>
+              </InfoContainer>
+            </Slide>
+          );
+        })}
         ;
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>
