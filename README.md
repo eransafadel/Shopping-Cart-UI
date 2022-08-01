@@ -3,6 +3,18 @@
 ## Home Page! 
 ![Shopping Website Home](./images/HomePage.jpg)
 
+## Products! 
+![Shopping Website Products](./images/Products.jpg)
+
+## Login Page! 
+![Shopping Website Login](./images/Login.jpg)
+
+## Cart Page! 
+![Shopping Website Cart](./images/Cart.jpg)
+
+## Footer! 
+![Shopping Website Footer](./images/Footer.jpg)
+
 
 
 ## Welcome! 👋
@@ -12,6 +24,7 @@
 
 ## The Project:
 React Shopping Website with Material UI,  and CSS from scratch.
+The project also responsive to 380 width screen.
 
 
 
