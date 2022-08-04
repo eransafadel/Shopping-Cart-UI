@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -53,11 +54,13 @@ const Title = styled.h1`
 const CategoryItem = ({ item }) => {
   return (
     <Conatiner>
-      <Image src={item.img} />
-      <Info>
-        <Title />
-        <Button>SHOP NOW</Button>
-      </Info>
+      <Link to={`/products/${item.cat}`}>
+        <Image src={item.img} />
+        <Info>
+          <Title />
+          <Button>SHOP NOW</Button>
+        </Info>
+      </Link>
     </Conatiner>
   );
 };
