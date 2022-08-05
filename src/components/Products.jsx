@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Products = ({ cat, filters, sort }) => {
 
-  console.log("cat is:", cat);
+  console.log(cat);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -33,17 +33,21 @@ const Products = ({ cat, filters, sort }) => {
       setFilteredProducts(
         products.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
+          {
+            
+           return item[key].includes(value.toLowerCase())
+          }
+
           )
         )
       );
 
   }, [products, cat, filters]);
 
-
+console.log("filter products is :",filteredProducts);
   return (
     <Container>
-      {popularProducts.map((item) => (
+      {filteredProducts.map((item) => (
         <Product item={item} key={item.id}></Product>
       ))}
     </Container>
