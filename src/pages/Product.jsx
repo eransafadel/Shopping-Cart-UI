@@ -10,6 +10,8 @@ import { PRODUCTS_SIZES } from "./productsListData"
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../api/index";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 
 const Container = styled.div``;
@@ -130,6 +132,9 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const dispach = useDispatch();
 
 
   const handleQuantity = (type) => {
@@ -156,6 +161,13 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+  const handleClick = ()=>{
+    //update cart:
+    console.log(product,quantity);
+    dispach( addProduct({...product,quantity,color,size}) );
+
+  };
+
   return (
     <Container >
       <Navbar />
@@ -175,13 +187,13 @@ const Product = () => {
             <Filter>
               <FilterTitle>Color</FilterTitle>
               {product.color?.map((item, index) =>
-                  <FilterColor key={index} color={item}/>
+                  <FilterColor key={index} color={item} onClick={()=>setColor(item)}/>
                 )}
 
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(e)=>setSize(e.target.value)}>
                 {product.size?.map((item, index) =>
                   <FilterSizeOption key={index}>{item.toUpperCase()}</FilterSizeOption>
                 )}
@@ -195,7 +207,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <AddIcon onClick={() => handleQuantity("INC")} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
