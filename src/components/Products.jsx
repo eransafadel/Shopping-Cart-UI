@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Products = ({ cat, filters, sort }) => {
 
-  console.log(cat);
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -32,10 +32,9 @@ const Products = ({ cat, filters, sort }) => {
     cat &&
       setFilteredProducts(
         products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-          {
-            
-           return item[key].includes(value.toLowerCase())
+          Object.entries(filters).every(([key, value]) => {
+
+            return item[key].includes(value.toLowerCase());
           }
 
           )
@@ -44,12 +43,42 @@ const Products = ({ cat, filters, sort }) => {
 
   }, [products, cat, filters]);
 
-console.log("filter products is :",filteredProducts);
+
+  useEffect(() => {
+
+
+    if (sort === "newest") {
+
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+      );
+    }
+    else if (sort === "asc") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
+    }
+
+    else {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+  }, [sort]);
+
+  const filteredProductsShow = filteredProducts.map((item) => (
+    <Product item={item} key={item.id}></Product>
+  ));
+
+  const productsShow = products.slice(0, 8)
+  .map((item) => (
+  <Product item={item} key={item.id}></Product>));
+
+
+
   return (
     <Container>
-      {filteredProducts.map((item) => (
-        <Product item={item} key={item.id}></Product>
-      ))}
+      {cat ? filteredProductsShow : productsShow}
     </Container>
   );
 };

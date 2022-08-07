@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
+import {PRODUCTS_SIZES,PRODUCTS_COLORS} from "./productsListData";
 
 const Container = styled.div``;
 
@@ -36,6 +37,9 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
+
+
+
 const ProductList = () => {
   const location = useLocation();
   const [filters, setFilters] = useState({});
@@ -51,7 +55,6 @@ const ProductList = () => {
   const [sort, setSort] = useState("newest");
 
 
-  console.log(filters);
 
 
 
@@ -61,7 +64,7 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
@@ -69,22 +72,19 @@ const ProductList = () => {
             <Option disabled >
               Color
             </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
+            {PRODUCTS_COLORS.map((item,index)=>
+              <Option key={index}>{item}</Option>
+            )}
+          
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled >
               Size
             </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+            {PRODUCTS_SIZES.map((item,index)=>
+              <Option key={index}>{item}</Option>
+            )}
+       
           </Select>
         </Filter>
         <Filter>
