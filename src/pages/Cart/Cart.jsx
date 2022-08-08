@@ -5,7 +5,14 @@ import styled from "styled-components";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { mobile } from "../../responsive";
+import { useEffect, useState } from 'react';
+import { userRequest } from '../../api';
+import { useNavigate } from "react-router-dom";
+import PaypalCheckoutButton from "../../components/PaypalCheckoutButton";
+
+
 
 const Container = styled.div``;
 
@@ -152,10 +159,15 @@ const Button = styled.button`
   background-color: black;
   color: white;
   font-weight: 600;
+  cursor:pointer;
 `;
 
 const Cart = () => {
-  const cart = useSelector(state=>state.cart);
+  const cart = useSelector(state => state.cart);
+
+  let navigate = useNavigate();
+
+
 
   return (
     <Container>
@@ -173,36 +185,36 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-          
+
             <Hr />
-           {cart.products.map( product =>
-           
-            <Product>
-              <ProductDetail>
-                <Image src={product.img} />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> {product.title}
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> {product._id}
-                  </ProductId>
-                  <ProductColor color={product.color} />
-                  <ProductSize>
-                    <b>Size:</b> {product.size}
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <AddIcon />
-                  <ProductAmount>{product.quantity}</ProductAmount>
-                  <RemoveIcon />
-                </ProductAmountContainer>
-                <ProductPrice>$ {product.price* product.quantity}</ProductPrice>
-              </PriceDetail>
-            </Product>
-           )}
+            {cart.products.map(product =>
+
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <AddIcon />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <RemoveIcon />
+                  </ProductAmountContainer>
+                  <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                </PriceDetail>
+              </Product>
+            )}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
@@ -222,7 +234,13 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+
+            {/* <Button>
+               CHECKOUT NOW */}
+  
+              <PaypalCheckoutButton cart={cart}>PAY NOW</PaypalCheckoutButton>
+            {/* </Button> */}
+
           </Summary>
         </Bottom>
       </Wrapper>
