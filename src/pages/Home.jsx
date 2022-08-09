@@ -6,8 +6,15 @@ import Products from '../components/Products'
 import Slider from '../components/Slider'
 import Newsletter from "../components/Newsletter"
 import Footer from '../components/Footer'
+import { useLocation } from 'react-router-dom'
 
 const Home = () => {
+  const {state} = useLocation();
+  if(state)
+  {
+    alert(state.msg);
+  }
+
   return (
     <div>
       <Announcement />
