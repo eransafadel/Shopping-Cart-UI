@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { mobile } from ".././responsive";
+import { login } from "../redux/apiCalls";
 
 const URL_IMG =
   "https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
@@ -63,14 +66,26 @@ const Link = styled.a`
 `;
 
 const Login = () => {
+
+
+
+  const [username,setUsername]= useState("");
+  const [password,setPassword]= useState("");
+  const dispach = useDispatch();
+
+  const handleLoginClick = (e)=>{
+    e.preventDefault();
+    login(dispach,{username,password})
+
+  }
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>LOGIN</Button>
+          <Input placeholder="username" onChange={(e)=>setUsername(e.target.value)}/>
+          <Input placeholder="password" type="password"  onChange={(e)=>setPassword(e.target.value)}/>
+          <Button onClick={handleLoginClick}>LOGIN</Button>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>
