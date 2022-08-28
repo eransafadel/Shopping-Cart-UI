@@ -30,7 +30,7 @@ The project also responsive to 380 width screen.
 
 ## Deploying project:
 In Process(not done) :
-https://eran-safadel-shopping.netlify.app/
+https://eran-safadel-shooping.netlify.app/
 
 
 **Have fun!** 🚀
